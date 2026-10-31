@@ -1,0 +1,130 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 42,
+    "spacing": 5,
+    "margin-top": 5,
+    "margin-left": 19,
+    "margin-right": 19,
+    "margin-bottom": 0,
+
+    "modules-left": ["hyprland/workspaces", "hyprland/window", "mpris"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "wireplumber#microphone",
+        "wireplumber",
+        "cpu",
+        "memory",
+        "battery",
+        "hyprland/language",
+        "bluetooth",
+        "tray"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "<span size='larger'>{icon}</span>",
+        "on-click": "activate",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
+        "icon-size": 10,
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+
+    "hyprland/window": {
+        "format": "  |  {title}",
+        "max-length": 50,
+        "separate-outputs": true,
+        "rewrite": {
+            "^  \\|  $": "  |  banana leclerc"
+        }
+    },
+
+    "mpris": {
+        "format": " |  {player_icon}  {dynamic}",
+        "format-paused": "  |  󰏤  <i>{dynamic}</i>",
+        "dynamic-order": ["artist", "title"],
+        "max-length": 28,
+        "player-icons": {
+            "default": "▶",
+            "spotify": "",
+            "firefox": ""
+        }
+    },
+
+    "clock": {
+        "format": "{:%d.%m.%Y | %H:%M}"
+    },
+
+    "wireplumber#microphone": {
+        "node-type": "Audio/Source",
+        "format": " {icon}",
+        "format-muted": " ",
+        "format-icons": [""],
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+    },
+
+    "wireplumber": {
+        "format": "󰕾  {volume}%  |",
+        "format-muted": "Muted  |",
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "on-scroll-up": "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "  {usage}%  ",
+        "tooltip": true,
+        "on-click": "alacritty -e htop"
+    },
+
+    "memory": {
+        "interval": 1,
+        "format": "  {}%",
+        "tooltip": true,
+        "tooltip-format": "{used:0.1f}GiB / {total:0.1f}GiB"
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "interval": 60,
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{icon}  {capacity}%  |",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "hyprland/language": {
+        "format": "{short}"
+    },
+
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+        "on-click": "blueman-manager",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 16
+    }
+}

@@ -1,0 +1,41 @@
+@define-color foreground #eeeeee;
+@define-color foreground-inactive #aaaaaa;
+@define-color background rgba(30, 30, 46, 0.7);
+
+* {
+    font-family: JetBrainsMono Nerd Font;
+    font-size: 17px;
+    padding: 0;
+}
+
+#waybar {
+    color: @foreground;
+    background: @background;
+    border: 2px solid rgba(89, 89, 89, 0.667);
+    border-radius: 8px;
+}
+
+#workspaces button {
+    color: @foreground;
+}
+
+#workspaces button.empty {
+    color: @foreground-inactive;
+}
+
+#wireplumber,
+#battery,
+#language,
+#bluetooth,
+#memory,
+#tray {
+    padding-right: 1em
+}
+
+#battery.warning:not(.charging) {
+    color: #eed49f;
+}
+
+#battery.critical:not(.charging) {
+    color: #ed8796;
+}
