@@ -4,7 +4,8 @@
 laptop="eDP-1"
 
 if [ "$1" = "close" ]; then
-    hyprctl monitors | grep "^Monitor" | grep -qv "$laptop" && hyprctl keyword monitor "$laptop, disable"
+    hyprctl monitors | grep "^Monitor" | grep -qv "$laptop" &&
+        hyprctl eval "hl.monitor({ output = \"$laptop\", disabled = true })"
 else
-    hyprctl keyword monitor "$laptop, preferred, auto, 1.25"
+    hyprctl eval "hl.monitor({ output = \"$laptop\", mode = \"preferred\", position = \"auto\", scale = 1.25 })"
 fi

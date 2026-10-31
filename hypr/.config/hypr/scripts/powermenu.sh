@@ -7,5 +7,5 @@ case "$choice" in
     sleep)    systemctl suspend ;;
     reboot)   systemctl reboot ;;
     shutdown) systemctl poweroff ;;
-    logout)   hyprctl dispatch exit ;;
+    logout)   hyprctl dispatch 'hl.dsp.exit()' ;;
 esac
