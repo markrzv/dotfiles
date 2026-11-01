@@ -118,6 +118,8 @@
 
     "battery": {
         "bat": "BAT0",
+        "on-click": "~/.config/hypr/scripts/charge-limit.sh",
+        "on-click-right": "~/.config/hypr/scripts/charge-limit.sh status",
         "interval": 60,
         "states": {
             "warning": 20,
