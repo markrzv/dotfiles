@@ -41,39 +41,41 @@ window#waybar {
     padding: 0 5px;
 }
 
-/* drawn dots: ring = empty, dot = has windows, pill = active */
-#workspaces button {
+/* ring = empty, dot = has windows, pill = active
+   margin so the whole bar height is clickable */
+window#waybar #custom-ws1,
+window#waybar #custom-ws2,
+window#waybar #custom-ws3,
+window#waybar #custom-ws4,
+window#waybar #custom-ws5 {
     min-width: 8px;
     min-height: 8px;
     margin: 15px 3px;
     padding: 0;
+    font-size: 1px;
     border-radius: 4px;
     background: alpha(@fg, 0.6);
     box-shadow: none;
     transition: min-width 150ms ease-out;
 }
 
-/* the label is empty, keep it from taking a line of text */
-#workspaces button label {
-    padding: 0;
-    font-size: 1px;
-    min-height: 0;
-    min-width: 0;
-}
-
-#workspaces button.empty {
+window#waybar #custom-ws1.empty,
+window#waybar #custom-ws2.empty,
+window#waybar #custom-ws3.empty,
+window#waybar #custom-ws4.empty,
+window#waybar #custom-ws5.empty {
     background: transparent;
     box-shadow: inset 0 0 0 1.5px alpha(@fg, 0.42);
 }
 
-#workspaces button.active {
+window#waybar #custom-ws1.active,
+window#waybar #custom-ws2.active,
+window#waybar #custom-ws3.active,
+window#waybar #custom-ws4.active,
+window#waybar #custom-ws5.active {
     min-width: 20px;
     background: alpha(@fg, 0.85);
     box-shadow: none;
-}
-
-#workspaces button:hover {
-    background: alpha(@fg, 0.85);
 }
 
 /* dimmed only when paused or muted, so the color tells the state */
