@@ -4,41 +4,45 @@ local scripts = "~/.config/hypr/scripts/"
 local function exec(cmd) return hl.dsp.exec_cmd(cmd) end
 
 -- apps
-hl.bind(mod .. " + Q", exec(apps.terminal))
-hl.bind(mod .. " + E", exec(apps.fileManager))
-hl.bind(mod .. " + B", exec(apps.browser))
-hl.bind(mod .. " + T", exec(apps.code))
-hl.bind(mod .. " + A", exec(apps.code .. " ~/dotfiles"))
-hl.bind(mod .. " + D", exec("discord"))
-hl.bind(mod .. " + L", exec(apps.menu))
-hl.bind("Print", exec(scripts .. "screenshot.sh"))
+hl.bind(mod .. " + Q", exec(apps.terminal), { description = "Terminal" })
+hl.bind(mod .. " + E", exec(apps.fileManager), { description = "Files" })
+hl.bind(mod .. " + B", exec(apps.browser), { description = "Browser" })
+hl.bind(mod .. " + T", exec(apps.code), { description = "VS Code" })
+hl.bind(mod .. " + A", exec(apps.code .. " ~/dotfiles"), { description = "Open dotfiles in VS Code" })
+hl.bind(mod .. " + D", exec("discord"), { description = "Discord" })
+hl.bind(mod .. " + L", exec(apps.menu), { description = "App launcher" })
+hl.bind("Print", exec(scripts .. "screenshot.sh"), { description = "Screenshot of a region" })
+-- print key without fn sends this
+hl.bind(mod .. " + SHIFT + S", exec(scripts .. "screenshot.sh"), { description = "Screenshot of a region" })
 
 -- windows
-hl.bind(mod .. " + C", hl.dsp.window.close())
-hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
-hl.bind(mod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
-hl.bind(mod .. " + left", hl.dsp.focus({ direction = "left" }))
+hl.bind(mod .. " + C", hl.dsp.window.close(), { description = "Close window" })
+hl.bind(mod .. " + V", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
+hl.bind(mod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }), { description = "Maximize" })
+hl.bind(mod .. " + CTRL + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }), { description = "Fullscreen" })
+hl.bind(mod .. " + left", hl.dsp.focus({ direction = "left" }), { description = "Move focus (all arrow keys)" })
 hl.bind(mod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mod .. " + down", hl.dsp.focus({ direction = "down" }))
-hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Move window" })
 hl.bind(mod .. " + SHIFT + mouse:272", hl.dsp.window.resize(), { mouse = true })
-hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window" })
 
 -- system
-hl.bind(mod .. " + Escape", exec("loginctl lock-session"))
-hl.bind(mod .. " + M", exec(scripts .. "powermenu.sh"))
-hl.bind(mod .. " + R", exec("nmcli device wifi rescan"))
-hl.bind(mod .. " + Space", exec("hyprctl switchxkblayout current next"))
-hl.bind(mod .. " + SHIFT + T", exec("theme menu"))
+hl.bind(mod .. " + Escape", exec("loginctl lock-session"), { description = "Lock screen" })
+hl.bind(mod .. " + M", exec(scripts .. "powermenu.sh"), { description = "Power menu" })
+hl.bind(mod .. " + R", exec("nmcli device wifi rescan"), { description = "Rescan Wi-Fi" })
+hl.bind(mod .. " + Space", exec("hyprctl switchxkblayout current next"), { description = "Switch keyboard layout" })
+hl.bind(mod .. " + SHIFT + T", exec("theme menu"), { description = "Switch theme" })
+hl.bind(mod .. " + Z", exec(scripts .. "focus.sh"), { description = "Focus mode" })
+hl.bind(mod .. " + K", exec(scripts .. "keys.sh"), { description = "This list" })
 
 -- workspaces, only 1 to 5
 local max_workspace = 5
 
 for i = 1, max_workspace do
-    hl.bind(mod .. " + " .. i, hl.dsp.focus({ workspace = i }))
-    hl.bind(mod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
+    hl.bind(mod .. " + " .. i, hl.dsp.focus({ workspace = i }), { description = i == 1 and "Go to workspace 1 to 5" or nil })
+    hl.bind(mod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }), { description = i == 1 and "Move window to workspace 1 to 5" or nil })
 end
 
 -- stops at 1 and 5
@@ -54,16 +58,16 @@ local function step(direction, move)
     end
 end
 
-hl.bind("CTRL + ALT + right", step(1))
-hl.bind("CTRL + ALT + left", step(-1))
-hl.bind("CTRL + ALT + SHIFT + right", step(1, true))
-hl.bind("CTRL + ALT + SHIFT + left", step(-1, true))
+hl.bind("CTRL + ALT + right", step(1), { description = "Next workspace" })
+hl.bind("CTRL + ALT + left", step(-1), { description = "Previous workspace" })
+hl.bind("CTRL + ALT + SHIFT + right", step(1, true), { description = "Move window to next workspace" })
+hl.bind("CTRL + ALT + SHIFT + left", step(-1, true), { description = "Move window to previous workspace" })
 hl.bind(mod .. " + mouse_down", step(1))
 hl.bind(mod .. " + mouse_up", step(-1))
 
 -- scratchpad
-hl.bind(mod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mod .. " + S", hl.dsp.workspace.toggle_special("magic"), { description = "Show or hide scratchpad" })
+hl.bind(mod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "special:magic" }), { description = "Move window to scratchpad" })
 
 -- volume, brightness
 local held = { locked = true, repeating = true }
@@ -83,4 +87,4 @@ hl.bind("XF86AudioPrev", exec("playerctl previous"), { locked = true })
 -- lid, super+p if the screen stays black
 hl.bind("switch:on:Lid Switch", exec(scripts .. "lid.sh close"), { locked = true })
 hl.bind("switch:off:Lid Switch", exec(scripts .. "lid.sh open"), { locked = true })
-hl.bind(mod .. " + P", exec(scripts .. "lid.sh open"))
+hl.bind(mod .. " + P", exec(scripts .. "lid.sh open"), { description = "Turn laptop screen back on" })

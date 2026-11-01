@@ -94,6 +94,7 @@ cat > "$config/dunst/dunstrc.d/colors.conf" <<EOF
     urgency = critical
     frame_color = "#$red"
     highlight = "#$red"
+    override_pause_level = 100
 EOF
 
 cat > "$config/alacritty/colors.toml" <<EOF

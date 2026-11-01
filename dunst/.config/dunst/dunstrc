@@ -24,5 +24,6 @@
 [osd]
     appname = osd
     history_ignore = yes
+    override_pause_level = 100
 
 # colors are in dunstrc.d/colors.conf
