@@ -1,34 +1,25 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 42,
-    "spacing": 5,
-    "margin-top": 5,
-    "margin-left": 19,
-    "margin-right": 19,
-    "margin-bottom": 0,
+    "height": 38,
+    "spacing": 0,
+    "margin-top": 12,
+    "margin-left": 12,
+    "margin-right": 12,
+    "reload_style_on_change": true,
 
-    "modules-left": ["hyprland/workspaces", "hyprland/window", "mpris"],
+    "modules-left": ["hyprland/workspaces", "mpris"],
     "modules-center": ["clock"],
-    "modules-right": [
-        "wireplumber#microphone",
-        "wireplumber",
-        "cpu",
-        "memory",
-        "battery",
-        "hyprland/language",
-        "bluetooth",
-        "tray"
-    ],
+    "modules-right": ["cpu", "memory", "tray", "custom/divider", "wireplumber#microphone", "wireplumber", "battery", "hyprland/language"],
+
+    "custom/divider": {
+        "format": "│",
+        "tooltip": false
+    },
 
     "hyprland/workspaces": {
-        "format": "<span size='larger'>{icon}</span>",
+        "format": "",
         "on-click": "activate",
-        "format-icons": {
-            "active": "",
-            "default": ""
-        },
-        "icon-size": 10,
         "sort-by-number": true,
         "persistent-workspaces": {
             "1": [],
@@ -39,62 +30,57 @@
         }
     },
 
-    "hyprland/window": {
-        "format": "  |  {title}",
-        "max-length": 50,
-        "separate-outputs": true,
-        "rewrite": {
-            "^  \\|  $": "  |  banana leclerc"
-        }
-    },
-
     "mpris": {
-        "format": " |  {player_icon}  {dynamic}",
-        "format-paused": "  |  󰏤  <i>{dynamic}</i>",
+        "format": "<span alpha='25%'>│</span>  {player_icon} {dynamic}",
+        "format-paused": "<span alpha='25%'>│</span>  󰏤 {dynamic}",
         "dynamic-order": ["artist", "title"],
-        "max-length": 28,
+        "max-length": 32,
         "player-icons": {
-            "default": "▶",
-            "spotify": "",
-            "firefox": ""
+            "default": "󰐊",
+            "spotify": "󰓇",
+            "firefox": "󰈹"
         }
     },
 
     "clock": {
-        "format": "{:%d.%m.%Y | %H:%M}"
+        "format": "<span alpha='60%'>{0:%a %d %b}</span>  {0:%H:%M}",
+        "tooltip-format": "<tt>{calendar}</tt>"
     },
 
-    "wireplumber#microphone": {
-        "node-type": "Audio/Source",
-        "format": " {icon}",
-        "format-muted": " ",
-        "format-icons": [""],
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-    },
-
-    "wireplumber": {
-        "format": "󰕾  {volume}%  |",
-        "format-muted": "Muted  |",
-        "max-volume": 100,
-        "scroll-step": 5,
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "pavucontrol",
-        "on-scroll-up": "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
-        "on-scroll-down": "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-    },
-
+    // only visible when the machine is busy
     "cpu": {
-        "interval": 10,
-        "format": "  {usage}%  ",
-        "tooltip": true,
+        "interval": 5,
+        "states": { "busy": 70 },
+        "format": "",
+        "format-busy": "󰻠 {usage}%",
         "on-click": "alacritty -e htop"
     },
 
     "memory": {
-        "interval": 1,
-        "format": "  {}%",
-        "tooltip": true,
-        "tooltip-format": "{used:0.1f}GiB / {total:0.1f}GiB"
+        "interval": 5,
+        "states": { "busy": 80 },
+        "format": "",
+        "format-busy": "󰍛 {percentage}%",
+        "tooltip-format": "{used:0.1f} / {total:0.1f} GiB"
+    },
+
+    "wireplumber#microphone": {
+        "node-type": "Audio/Source",
+        "format": "󰍬",
+        "format-muted": "󰍭",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+    },
+
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰖁 {volume}%",
+        "format-icons": ["󰕿", "󰖀", "󰕾"],
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pkill -x pavucontrol || pavucontrol",
+        "on-scroll-up": "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
 
     "battery": {
@@ -104,27 +90,17 @@
             "warning": 20,
             "critical": 10
         },
-        "format": "{icon}  {capacity}%  |",
-        "format-icons": ["", "", "", "", ""]
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
     "hyprland/language": {
-        "format": "{short}"
-    },
-
-
-    "bluetooth": {
-        "format": "󰂯",
-        "format-disabled": "󰂲",
-        "format-connected": "󰂱",
-        "on-click": "blueman-manager",
-        "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+        "format": "<span text_transform='uppercase'>{short}</span>"
     },
 
     "tray": {
-        "icon-size": 16,
+        "icon-size": 18,
         "spacing": 16
     }
 }

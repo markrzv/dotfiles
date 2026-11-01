@@ -1,5 +1,6 @@
-# prompt
-PROMPT='%B%F{#8aadf4}%n%f%b%B%F{#cad3f5}@%f%b%B%F{#c6a0f6}%m%f%b %F{#a6da95}%~%f %# '
+# prompt, colors from the theme command
+. "$ZDOTDIR/colors.zsh"
+PROMPT="%B%F{#$c_accent}%n%f%b%B%F{#$c_fg}@%f%b%B%F{#$c_accent2}%m%f%b %F{#$c_green}%~%f %# "
 
 # history
 mkdir -p ~/.local/state/zsh ~/.cache/zsh

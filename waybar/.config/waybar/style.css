@@ -1,41 +1,106 @@
-@define-color foreground #eeeeee;
-@define-color foreground-inactive #aaaaaa;
-@define-color background rgba(30, 30, 46, 0.7);
+@import "colors.css";
 
-* {
-    font-family: JetBrainsMono Nerd Font;
-    font-size: 17px;
-    padding: 0;
+/* not for tray menus */
+window#waybar,
+window#waybar * {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 16px;
+    font-weight: 500;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
 }
 
-#waybar {
-    color: @foreground;
-    background: @background;
-    border: 2px solid rgba(89, 89, 89, 0.667);
-    border-radius: 8px;
+window#waybar {
+    background: alpha(@bg_alt, 0.75);
+    border: 1px solid alpha(@overlay, 0.6);
+    border-radius: 10px;
+    color: alpha(@fg, 0.85);
 }
 
-#workspaces button {
-    color: @foreground;
+.modules-left {
+    padding-left: 4px;
 }
 
-#workspaces button.empty {
-    color: @foreground-inactive;
+.modules-right {
+    padding-right: 4px;
 }
 
+#mpris,
+#cpu,
+#memory,
+#tray,
 #wireplumber,
 #battery,
 #language,
-#bluetooth,
-#memory,
-#tray {
-    padding-right: 1em
+#clock {
+    padding: 0 8px;
 }
 
-#battery.warning:not(.charging) {
-    color: #eed49f;
+#workspaces {
+    padding: 0 5px;
+}
+
+/* drawn dots: ring = empty, dot = has windows, pill = active */
+#workspaces button {
+    min-width: 8px;
+    min-height: 8px;
+    margin: 15px 3px;
+    padding: 0;
+    border-radius: 4px;
+    background: alpha(@fg, 0.6);
+    box-shadow: none;
+    transition: min-width 150ms ease-out;
+}
+
+/* the label is empty, keep it from taking a line of text */
+#workspaces button label {
+    padding: 0;
+    font-size: 1px;
+    min-height: 0;
+    min-width: 0;
+}
+
+#workspaces button.empty {
+    background: transparent;
+    box-shadow: inset 0 0 0 1.5px alpha(@fg, 0.42);
+}
+
+#workspaces button.active {
+    min-width: 20px;
+    background: alpha(@fg, 0.85);
+    box-shadow: none;
+}
+
+#workspaces button:hover {
+    background: alpha(@fg, 0.85);
+}
+
+/* dimmed only when paused or muted, so the color tells the state */
+#mpris.paused,
+#wireplumber.muted {
+    color: alpha(@fg, 0.6);
+}
+
+#clock {
+    font-weight: 600;
+}
+
+#custom-divider {
+    padding: 0 4px;
+    color: alpha(@fg, 0.25);
 }
 
 #battery.critical:not(.charging) {
-    color: #ed8796;
+    color: @red;
+}
+
+tooltip {
+    background: @bg_alt;
+    border: 1px solid alpha(@overlay, 0.6);
+    border-radius: 10px;
+}
+
+tooltip label {
+    padding: 4px 8px;
 }

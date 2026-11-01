@@ -1,13 +1,18 @@
+local colors = dofile(os.getenv("HOME") .. "/.config/hypr/colors.lua")
+
 hl.config({
     general = {
+        -- 12px around and between windows
+        gaps_in = 6,
+        gaps_out = 12,
         col = {
-            active_border = { colors = { "rgba(8aadf4ff)", "rgba(c6a0f6ff)" }, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border = { colors = { "rgba(" .. colors.accent .. "ff)", "rgba(" .. colors.accent2 .. "ff)" }, angle = 45 },
+            inactive_border = "rgba(" .. colors.overlay .. "aa)",
         },
     },
     decoration = {
         rounding = 10,
-        blur = { size = 3 },
+        blur = { size = 6, passes = 2 },
     },
 })
 

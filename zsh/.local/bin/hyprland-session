@@ -1,0 +1,3 @@
+#!/bin/sh
+# started by greetd, loads the zsh login env first
+exec zsh -l -c start-hyprland

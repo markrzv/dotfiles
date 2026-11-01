@@ -31,20 +31,35 @@ hl.bind(mod .. " + Escape", exec("loginctl lock-session"))
 hl.bind(mod .. " + M", exec(scripts .. "powermenu.sh"))
 hl.bind(mod .. " + R", exec("nmcli device wifi rescan"))
 hl.bind(mod .. " + Space", exec("hyprctl switchxkblayout current next"))
+hl.bind(mod .. " + SHIFT + T", exec("theme menu"))
 
--- workspaces
-for i = 1, 10 do
-    local key = i % 10
-    hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-    hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+-- workspaces, only 1 to 5
+local max_workspace = 5
+
+for i = 1, max_workspace do
+    hl.bind(mod .. " + " .. i, hl.dsp.focus({ workspace = i }))
+    hl.bind(mod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
 
-hl.bind("CTRL + ALT + right", hl.dsp.focus({ workspace = "+1" }))
-hl.bind("CTRL + ALT + left", hl.dsp.focus({ workspace = "-1" }))
-hl.bind("CTRL + ALT + SHIFT + right", hl.dsp.window.move({ workspace = "e+1" }))
-hl.bind("CTRL + ALT + SHIFT + left", hl.dsp.window.move({ workspace = "e-1" }))
-hl.bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+-- stops at 1 and 5
+local function step(direction, move)
+    return function()
+        local current = hl.get_active_workspace()
+        local target = math.max(1, math.min(max_workspace, (current and current.id or 1) + direction))
+        if move then
+            hl.dispatch(hl.dsp.window.move({ workspace = target }))
+        else
+            hl.dispatch(hl.dsp.focus({ workspace = target }))
+        end
+    end
+end
+
+hl.bind("CTRL + ALT + right", step(1))
+hl.bind("CTRL + ALT + left", step(-1))
+hl.bind("CTRL + ALT + SHIFT + right", step(1, true))
+hl.bind("CTRL + ALT + SHIFT + left", step(-1, true))
+hl.bind(mod .. " + mouse_down", step(1))
+hl.bind(mod .. " + mouse_up", step(-1))
 
 -- scratchpad
 hl.bind(mod .. " + S", hl.dsp.workspace.toggle_special("magic"))

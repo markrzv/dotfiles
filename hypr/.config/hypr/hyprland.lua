@@ -15,6 +15,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("nm-applet --indicator")
+    hl.exec_cmd("blueman-applet")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("~/.config/hypr/scripts/battery.sh")
     hl.exec_cmd(apps.browser)
@@ -41,6 +42,7 @@ hl.device({
 })
 
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+hl.config({ gestures = { workspace_swipe_create_new = false } })
 
 require("look")
 require("binds")
