@@ -27,6 +27,7 @@ window#waybar {
 }
 
 #mpris,
+#custom-todo,
 #cpu,
 #memory,
 #tray,
@@ -78,8 +79,8 @@ window#waybar #custom-ws5.active {
     box-shadow: none;
 }
 
-/* dimmed only when paused or muted, so the color tells the state */
 #mpris.paused,
+#custom-todo.empty,
 #wireplumber.muted {
     color: alpha(@fg, 0.6);
 }

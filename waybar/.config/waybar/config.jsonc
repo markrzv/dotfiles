@@ -10,7 +10,7 @@
 
     "modules-left": ["group/workspaces", "mpris"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "tray", "custom/divider", "wireplumber#microphone", "wireplumber", "battery", "hyprland/language"],
+    "modules-right": ["custom/todo", "cpu", "memory", "tray", "custom/divider", "wireplumber#microphone", "wireplumber", "battery", "hyprland/language"],
 
     "custom/divider": {
         "format": "│",
@@ -78,6 +78,15 @@
     "clock": {
         "format": "<span alpha='60%'>{0:%a %d %b}</span>  {0:%H:%M}",
         "tooltip-format": "<tt>{calendar}</tt>"
+    },
+
+    "custom/todo": {
+        "exec": "~/.config/hypr/scripts/todo.py bar",
+        "return-type": "json",
+        "interval": 60,
+        "signal": 9,
+        "on-click": "~/.config/hypr/scripts/todo.py menu",
+        "on-click-right": "~/.config/hypr/scripts/todo.py edit"
     },
 
     // only visible when the machine is busy

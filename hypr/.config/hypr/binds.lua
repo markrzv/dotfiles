@@ -11,6 +11,7 @@ hl.bind(mod .. " + T", exec(apps.code), { description = "VS Code" })
 hl.bind(mod .. " + A", exec(apps.code .. " ~/dotfiles"), { description = "Open dotfiles in VS Code" })
 hl.bind(mod .. " + D", exec("discord"), { description = "Discord" })
 hl.bind(mod .. " + L", exec(apps.menu), { description = "App launcher" })
+hl.bind(mod .. " + N", exec(scripts .. "todo.py menu"), { description = "Today's todos" })
 hl.bind("Print", exec(scripts .. "screenshot.sh"), { description = "Screenshot of a region" })
 -- print key without fn sends this
 hl.bind(mod .. " + SHIFT + S", exec(scripts .. "screenshot.sh"), { description = "Screenshot of a region" })
