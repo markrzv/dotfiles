@@ -2,6 +2,7 @@
 local workspaces = {
     ["app.zen_browser.zen"] = "1",
     ["com.microsoft.VSCode|[Cc]ode"] = "2",
+    ["com.anthropic.Claude"] = "2",
     ["[Dd]iscord"] = "3",
     ["[Ss]lack"] = "3",
     ["[Ss]potify"] = "4",
