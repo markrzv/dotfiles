@@ -1,5 +1,20 @@
+local function output_of(cmd)
+    local process = io.popen(cmd)
+    local output = process:read("a")
+    process:close()
+    return output
+end
+
+-- runs again on reload, keep the laptop screen off
+local lid_closed = output_of("cat /proc/acpi/button/lid/*/state"):find("closed")
+local has_external = output_of("grep -lx connected /sys/class/drm/*/status | grep -v eDP") ~= ""
+
 hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "auto", scale = 1 })
-hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1.25 })
+if lid_closed and has_external then
+    hl.monitor({ output = "eDP-1", disabled = true })
+else
+    hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1.25 })
+end
 
 -- used in binds.lua too
 apps = {
