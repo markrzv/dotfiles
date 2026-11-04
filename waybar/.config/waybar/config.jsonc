@@ -17,7 +17,8 @@
         "tooltip": false
     },
 
-    // own modules, the built-in ones do not work with a lua config
+    // built-in workspaces module does not work with a lua config
+    // threshold so the touchpad does not skip workspaces
     "group/workspaces": {
         "orientation": "horizontal",
         "modules": ["custom/ws1", "custom/ws2", "custom/ws3", "custom/ws4", "custom/ws5"]
@@ -28,7 +29,10 @@
         "return-type": "json",
         "restart-interval": 2,
         "tooltip": false,
-        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 1 })'"
+        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 1 })'",
+        "smooth-scrolling-threshold": 1,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.max(1, hl.get_active_workspace().id - 1) })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.min(5, hl.get_active_workspace().id + 1) })'"
     },
 
     "custom/ws2": {
@@ -36,7 +40,10 @@
         "return-type": "json",
         "restart-interval": 2,
         "tooltip": false,
-        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 2 })'"
+        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 2 })'",
+        "smooth-scrolling-threshold": 1,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.max(1, hl.get_active_workspace().id - 1) })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.min(5, hl.get_active_workspace().id + 1) })'"
     },
 
     "custom/ws3": {
@@ -44,7 +51,10 @@
         "return-type": "json",
         "restart-interval": 2,
         "tooltip": false,
-        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 3 })'"
+        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 3 })'",
+        "smooth-scrolling-threshold": 1,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.max(1, hl.get_active_workspace().id - 1) })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.min(5, hl.get_active_workspace().id + 1) })'"
     },
 
     "custom/ws4": {
@@ -52,7 +62,10 @@
         "return-type": "json",
         "restart-interval": 2,
         "tooltip": false,
-        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 4 })'"
+        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 4 })'",
+        "smooth-scrolling-threshold": 1,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.max(1, hl.get_active_workspace().id - 1) })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.min(5, hl.get_active_workspace().id + 1) })'"
     },
 
     "custom/ws5": {
@@ -60,7 +73,10 @@
         "return-type": "json",
         "restart-interval": 2,
         "tooltip": false,
-        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 5 })'"
+        "on-click": "hyprctl dispatch 'hl.dsp.focus({ workspace = 5 })'",
+        "smooth-scrolling-threshold": 1,
+        "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.max(1, hl.get_active_workspace().id - 1) })'",
+        "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = math.min(5, hl.get_active_workspace().id + 1) })'"
     },
 
     "mpris": {
