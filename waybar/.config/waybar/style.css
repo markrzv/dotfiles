@@ -85,6 +85,16 @@ window#waybar #custom-ws5.active {
     color: alpha(@fg, 0.6);
 }
 
+#cpu,
+#memory {
+    color: alpha(@fg, 0.6);
+}
+
+#cpu.busy,
+#memory.busy {
+    color: @yellow;
+}
+
 #clock {
     font-weight: 600;
 }

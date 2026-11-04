@@ -10,7 +10,7 @@
 
     "modules-left": ["group/workspaces", "mpris"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/todo", "cpu", "memory", "tray", "custom/divider", "wireplumber#microphone", "wireplumber", "battery", "hyprland/language"],
+    "modules-right": ["custom/todo", "tray", "custom/divider", "cpu", "memory", "wireplumber#microphone", "wireplumber", "battery", "hyprland/language"],
 
     "custom/divider": {
         "format": "│",
@@ -89,21 +89,20 @@
         "on-click-right": "~/.config/hypr/scripts/todo.py edit"
     },
 
-    // only visible when the machine is busy
+    // :2 keeps the width fixed
     "cpu": {
         "interval": 5,
         "states": { "busy": 70 },
-        "format": "",
-        "format-busy": "󰻠 {usage}%",
+        "format": "󰻠 {usage:2}%",
         "on-click": "alacritty -e htop"
     },
 
     "memory": {
         "interval": 5,
         "states": { "busy": 80 },
-        "format": "",
-        "format-busy": "󰍛 {percentage}%",
-        "tooltip-format": "{used:0.1f} / {total:0.1f} GiB"
+        "format": "󰍛 {percentage:2}%",
+        "tooltip-format": "{used:0.1f} / {total:0.1f} GiB",
+        "on-click": "alacritty -e htop -s PERCENT_MEM"
     },
 
     "wireplumber#microphone": {
